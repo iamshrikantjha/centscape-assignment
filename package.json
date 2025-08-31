@@ -1,0 +1,16 @@
+{
+  "name": "centscape-assignment",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "description": "Centscape take-home assignment",
+  "scripts": {
+    "verify": "cd server && npm run test && cd ../app && npm run typecheck",
+    "install-all": "npm install && cd server && npm install && cd ../app && npm install",
+    "dev": "concurrently \"cd server && npm run dev\" \"cd app && npm start\"",
+    "test": "cd server && npm test"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

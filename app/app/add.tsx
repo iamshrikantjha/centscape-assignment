@@ -78,6 +78,23 @@ export default function AddItemScreen() {
     fetchPreview(url);
   };
 
+  const testNetworkConnection = async () => {
+    try {
+      console.log('🔍 Testing network connection...');
+      const results = await PreviewService.testNetworkConnectivity();
+      const serverUrl = Object.keys(results)[0];
+      const isConnected = results[serverUrl];
+      
+      Alert.alert(
+        'Network Test',
+        `Server: ${serverUrl}\nStatus: ${isConnected ? '✅ Connected' : '❌ Failed'}\n\nIf connection failed, check:\n• Server is running\n• Same network\n• Firewall settings`,
+        [{ text: 'OK' }]
+      );
+    } catch (error) {
+      Alert.alert('Network Test Failed', error instanceof Error ? error.message : 'Unknown error');
+    }
+  };
+
   const addToWishlist = async () => {
     if (!preview) return;
 
@@ -248,6 +265,15 @@ export default function AddItemScreen() {
               <Text style={styles.previewButtonText}>Get Preview</Text>
             )}
           </TouchableOpacity>
+
+          <TouchableOpacity
+            style={styles.networkTestButton}
+            onPress={testNetworkConnection}
+            accessibilityLabel="Test network connection"
+            accessibilityRole="button"
+          >
+            <Text style={styles.networkTestButtonText}>Test Connection</Text>
+          </TouchableOpacity>
         </View>
 
         {renderPreview()}
@@ -317,6 +343,23 @@ const styles = StyleSheet.create({
   previewButtonText: {
     color: 'white',
     fontSize: 16,
+    fontWeight: '600',
+  },
+  networkTestButton: {
+    backgroundColor: '#34C759',
+    padding: 12,
+    borderRadius: 8,
+    alignItems: 'center',
+    marginTop: 12,
+    shadowColor: '#34C759',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 4,
+  },
+  networkTestButtonText: {
+    color: 'white',
+    fontSize: 14,
     fontWeight: '600',
   },
   loadingContainer: {

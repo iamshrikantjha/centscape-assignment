@@ -78,6 +78,25 @@ export class PreviewService {
     }
   }
 
+  // Debug method to test network connectivity
+  static async testNetworkConnectivity(): Promise<{ [key: string]: boolean }> {
+    const results: { [key: string]: boolean } = {};
+    
+    try {
+      console.log(`🔍 Testing connectivity to: ${this.SERVER_URL}`);
+      const response = await fetch(`${this.SERVER_URL}/health`, {
+        method: 'GET',
+      });
+      results[this.SERVER_URL] = response.ok;
+      console.log(`✅ ${this.SERVER_URL}: ${response.ok ? 'OK' : 'Failed'}`);
+    } catch (error) {
+      results[this.SERVER_URL] = false;
+      console.log(`❌ ${this.SERVER_URL}: Failed - ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+    
+    return results;
+  }
+
   // Helper method to validate URLs on client side
   static isValidUrl(url: string): boolean {
     try {

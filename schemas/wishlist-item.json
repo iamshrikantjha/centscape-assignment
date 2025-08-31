@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Wishlist Item",
+  "type": "object",
+  "required": ["id", "title", "siteName", "sourceUrl", "createdAt"],
+  "properties": {
+    "id": { "type": "string" },
+    "title": { "type": "string" },
+    "image": { "type": "string", "format": "uri" },
+    "price": { "type": "string" },
+    "currency": { "type": "string" },
+    "siteName": { "type": "string" },
+    "sourceUrl": { "type": "string", "format": "uri" },
+    "normalizedUrl": { "type": "string" },
+    "createdAt": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

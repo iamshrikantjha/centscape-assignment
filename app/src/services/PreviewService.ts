@@ -9,7 +9,7 @@ export interface PreviewData {
 
 export class PreviewService {
   private static readonly SERVER_URL = __DEV__ 
-    ? 'http://localhost:3000' 
+    ? 'http://192.168.18.203:3001' 
     : 'https://your-production-server.com';
 
   static async fetchPreview(url: string): Promise<PreviewData> {
